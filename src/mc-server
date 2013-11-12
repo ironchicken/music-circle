@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+package Main;
+
+use Getopt::Std;
+
+use lib '../lib';
+
+use MusicCircle::Config;
+use MusicCircle::API;
+use MusicCircle::Data;
+
+sub main {
+    my %opts;
+    getopts('c:', \%opts);
+
+    MusicCircle::Config::load_config $opts{c};
+    MusicCircle::Data::connect();
+}
+
+main;

@@ -13,4 +13,17 @@
 
 package MusicCircle::API;
 
+require Exporter;
+our @ISA = qw(Exporter);
+our @EXPORT = qw($mc);
+
+use Plack::Builder;
+
+my $mc = sub { ... };
+
+builder {
+    ...;
+    $mc;
+};
+
 1;

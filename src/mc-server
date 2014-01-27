@@ -13,12 +13,18 @@ use MusicCircle::Config;
 use MusicCircle::API;
 use MusicCircle::Data;
 
+use Plack::Runner;
+
 sub main {
     my %opts;
     getopts('c:', \%opts);
 
     MusicCircle::Config::load_config $opts{c};
     MusicCircle::Data::connect();
+
+    my $runner = Plack::Runner->new;
+    $runner->parse_options(@MusicCircle::Config::options->{server});
+    $runner->run($MusicCircle::API::mc);
 }
 
 main;

@@ -18,20 +18,20 @@ package Musical::Work;
 
 use Moose;
 use namespace::autoclean;
-with qw(MooseX::Semantic::Role::WithRdfType');
+with qw(MooseX::Semantic::Role::WithRdfType);
 with qw(MooseX::Semantic::Meta::Attribute::Trait);
 
 use RDF::Trine::Namespace qw(rdf xsd);
-use Musical qw($mo $frbr);
+use Musical qw($mo);
+use FRBR qw($frbr);
 
 __PACKAGE__->rdf_type($mo->MusicalWork);
 
 has 'creator' => (
     traits       => ['Semantic'],
     is           => 'rw',
-    isa          => 'Str',
+    isa          => 'FRBR::ResponsibleEntity',
     uri          => $frbr->creator,
-    rdf_datatype => $xsd->string,
     );
 
 has 'iswc' => (

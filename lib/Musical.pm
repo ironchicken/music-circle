@@ -18,10 +18,9 @@ package Musical;
 
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw($mo $frbr);
+our @EXPORT = qw($mo);
 
 use RDF::Trine::Namespace ();
 our $mo = RDF::Trine::Namespace->new('http://purl.org/ontology/mo#');
-our $frbr = RDF::Trine::Namespace->new('http://purl.org/vocab/frbr/core#');
 
 1;

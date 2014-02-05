@@ -16,14 +16,14 @@ package Musical::Manifestation;
 use Moose;
 use namespace::autoclean;
 
-with qw(MooseX::Semantic::Role::WithRdfType);
-with qw(MooseX::Semantic::Meta::Attribute::Trait);
+with qw(MooseX::Semantic::Role::PortableResource);
 
 use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
 use FRBR qw($frbr);
 use FOAF;
 use MusicCircle::MediaType;
+use Musical::Expression;
 
 __PACKAGE__->rdf_type($mo->MusicalManifestation);
 

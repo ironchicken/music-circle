@@ -11,6 +11,7 @@
 #
 # Copyright (C) 2013 Richard Lewis, Goldsmiths' College
 
+{
 package Musical::Expression;
 
 # This package defines the Musical::Expression class which corresponds
@@ -75,5 +76,108 @@ has 'dimensions' => (
     );
 
 __PACKAGE__->meta->make_immutable;
+}
+
+{
+package Musical::Libretto;
+
+use Moose;
+use namespace::autoclean;
+
+with qw(MooseX::Semantic::Role::PortableResource);
+
+extends 'Musical::Expression';
+
+use Musical qw($mo);
+
+__PACKAGE__->rdf_type($mo->Libretto);
+
+__PACKAGE__->meta->make_immutable;
+}
+
+{
+package Musical::Lyrics;
+
+use Moose;
+use namespace::autoclean;
+
+with qw(MooseX::Semantic::Role::PortableResource);
+
+extends 'Musical::Expression';
+
+use Musical qw($mo);
+
+__PACKAGE__->rdf_type($mo->Lyrics);
+
+__PACKAGE__->meta->make_immutable;
+}
+
+{
+package Musical::Score;
+
+use Moose;
+use namespace::autoclean;
+
+with qw(MooseX::Semantic::Role::PortableResource);
+
+extends 'Musical::Expression';
+
+use Musical qw($mo);
+
+__PACKAGE__->rdf_type($mo->Score);
+
+__PACKAGE__->meta->make_immutable;
+}
+
+{
+package Musical::Signal;
+
+use Moose;
+use namespace::autoclean;
+
+with qw(MooseX::Semantic::Role::PortableResource);
+
+extends 'Musical::Expression';
+
+use Musical qw($mo);
+
+__PACKAGE__->rdf_type($mo->Signal);
+
+__PACKAGE__->meta->make_immutable;
+}
+
+{
+package Musical::SignalGroup;
+
+use Moose;
+use namespace::autoclean;
+
+with qw(MooseX::Semantic::Role::PortableResource);
+
+extends 'Musical::Expression';
+
+use Musical qw($mo);
+
+__PACKAGE__->rdf_type($mo->SignalGroup);
+
+__PACKAGE__->meta->make_immutable;
+}
+
+{
+package Musical::Sound;
+
+use Moose;
+use namespace::autoclean;
+
+with qw(MooseX::Semantic::Role::PortableResource);
+
+extends 'Musical::Expression';
+
+use Musical qw($mo);
+
+__PACKAGE__->rdf_type($mo->Sound);
+
+__PACKAGE__->meta->make_immutable;
+}
 
 1;

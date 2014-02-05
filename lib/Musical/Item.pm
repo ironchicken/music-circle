@@ -29,38 +29,38 @@ use Musical::Manifestation;
 __PACKAGE__->rdf_type($mo->MusicalItem);
 
 has 'exemplar_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Manifestation',
-    uri => $frbr->exemplar_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Manifestation',
+    uri          => $frbr->exemplar_of,
     );
 
 has 'reconfiguration' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Item',
-    uri => $frbr->reconfiguration,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Item',
+    uri          => $frbr->reconfiguration,
     );
 
 has 'reconfiguration_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Item',
-    uri => $frbr->reconfiguration_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Item',
+    uri          => $frbr->reconfiguration_of,
     );
 
 has 'owner' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'FRBR::ResponsibleEntity',
-    uri => $frbr->owner,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'FRBR::ResponsibleEntity',
+    uri          => $frbr->owner,
     );
 
 has 'encodes' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Signal',
-    uri => $mo->encodes,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Signal',
+    uri          => $mo->encodes,
     );
 
 __PACKAGE__->meta->make_immutable;

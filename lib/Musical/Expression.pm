@@ -29,50 +29,50 @@ use FRBR;
 __PACKAGE__->rdf_type($mo->MusicalExpression);
 
 has 'realization_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Work',
-    uri => $frbr->realization_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Work',
+    uri          => $frbr->realization_of,
     );
 
 has 'abridgement_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Expression',
-    uri => $frbr->abridgement_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Expression',
+    uri          => $frbr->abridgement_of,
     );
 
 has 'revision_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Expression',
-    uri => $frbr->revision_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Expression',
+    uri          => $frbr->revision_of,
     );
 
 has 'translation_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Expression',
-    uri => $frbr->translation_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Expression',
+    uri          => $frbr->translation_of,
     );
 
 has 'arrangement_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Expression',
-    uri => $frbr->arrangement_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Expression',
+    uri          => $frbr->arrangement_of,
     );
 
 has 'realizer' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'FRBR::ResponsibleEntity',
-    uri => $frbr->realizer,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'FRBR::ResponsibleEntity',
+    uri          => $frbr->realizer,
     );
 
 has 'dimensions' => (
-    is => 'rw',
-    isa => 'ArrayRef[Musical::Dimension]',
+    is           => 'rw',
+    isa          => 'ArrayRef[Musical::Dimension]',
     );
 
 __PACKAGE__->meta->make_immutable;

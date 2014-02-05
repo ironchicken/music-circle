@@ -28,103 +28,103 @@ use Musical::Expression;
 __PACKAGE__->rdf_type($mo->MusicalManifestation);
 
 has 'embodiment_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Expression',
-    uri => $frbr->embodiment_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Expression',
+    uri          => $frbr->embodiment_of,
     );
 
 has 'alternate' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Manifestation',
-    uri => $frbr->alternate,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Manifestation',
+    uri          => $frbr->alternate,
     );
 
 has 'alternate_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Manifestation',
-    uri => $frbr->alternate_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Manifestation',
+    uri          => $frbr->alternate_of,
     );
 
 has 'compilation_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'ArrayRef[Musical::Signal]',
-    uri => $mo->compilation_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'ArrayRef[Musical::Signal]',
+    uri          => $mo->compilation_of,
     );
 
 has 'compiler' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'FOAF::Agent',
-    uri => $mo->compiler,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'FOAF::Agent',
+    uri          => $mo->compiler,
     );
 
 has 'media_type' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'MusicCircle::MediaType',
-    uri => $mo->media_type,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'MusicCircle::MediaType',
+    uri          => $mo->media_type,
     );
 
 has 'other_release_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Manifestation',
-    uri => $mo->other_release_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Manifestation',
+    uri          => $mo->other_release_of,
     );
 
 has 'preview' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Item',
-    uri => $mo->preview,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Item',
+    uri          => $mo->preview,
     );
 
 has 'producer' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'FOAF::Agent',
-    uri => $mo->producer,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'FOAF::Agent',
+    uri          => $mo->producer,
     );
 
 has 'publication_of' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Musical::Expression',
-    uri => $mo->publication_of,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Musical::Expression',
+    uri          => $mo->publication_of,
     );
 
 has 'publisher' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'FOAF::Agent',
-    uri => $mo->publisher,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'FOAF::Agent',
+    uri          => $mo->publisher,
     );
 
 has 'publishing_location' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Str',
-    uri => $mo->publishing_location,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Str',
+    uri          => $mo->publishing_location,
     rdf_datatype => $xsd->string,
     );
 
 has 'release_status' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Str',
-    uri => $mo->release_status,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Str',
+    uri          => $mo->release_status,
     rdf_datatype => $xsd->string,
     );
 
 has 'release_type' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Str',
-    uri => $mo->release_type,
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Str',
+    uri          => $mo->release_type,
     rdf_datatype => $xsd->string,
     );
 

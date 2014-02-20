@@ -17,6 +17,7 @@ package Musical::Work;
 # the Music Ontology class mo:MusicalWork.
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 with qw(MooseX::Semantic::Role::PortableResource);
 
@@ -25,6 +26,12 @@ use Musical qw($mo);
 use FRBR qw($frbr);
 
 __PACKAGE__->rdf_type($mo->MusicalWork);
+
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-musical-work',
+    );
 
 has 'creator' => (
     traits       => ['Semantic'],

@@ -17,6 +17,7 @@ package Musical::Composition;
 # the Music Ontology class mo:Composition.
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -25,6 +26,12 @@ use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
 
 __PACKAGE__->rdf_type($mo->Composition);
+
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-composition',
+    );
 
 __PACKAGE__->meta->make_immutable;
 

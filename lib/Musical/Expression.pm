@@ -18,6 +18,7 @@ package Musical::Expression;
 # with the Music Ontology class mo:MusicalExpression.
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -27,6 +28,11 @@ use Musical qw($mo);
 use FRBR;
 
 __PACKAGE__->rdf_type($mo->MusicalExpression);
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-musical-expression',
+    );
 
 has 'realization_of' => (
     traits       => ['Semantic'],
@@ -82,6 +88,7 @@ __PACKAGE__->meta->make_immutable;
 package Musical::Libretto;
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -92,6 +99,12 @@ use Musical qw($mo);
 
 __PACKAGE__->rdf_type($mo->Libretto);
 
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-libretto',
+    );
+
 __PACKAGE__->meta->make_immutable;
 }
 
@@ -99,6 +112,7 @@ __PACKAGE__->meta->make_immutable;
 package Musical::Lyrics;
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -109,6 +123,12 @@ use Musical qw($mo);
 
 __PACKAGE__->rdf_type($mo->Lyrics);
 
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-lyrics',
+    );
+
 __PACKAGE__->meta->make_immutable;
 }
 
@@ -116,6 +136,7 @@ __PACKAGE__->meta->make_immutable;
 package Musical::Score;
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -126,6 +147,12 @@ use Musical qw($mo);
 
 __PACKAGE__->rdf_type($mo->Score);
 
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-score',
+    );
+
 __PACKAGE__->meta->make_immutable;
 }
 
@@ -133,6 +160,7 @@ __PACKAGE__->meta->make_immutable;
 package Musical::Signal;
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -143,6 +171,12 @@ use Musical qw($mo);
 
 __PACKAGE__->rdf_type($mo->Signal);
 
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-signal',
+    );
+
 __PACKAGE__->meta->make_immutable;
 }
 
@@ -150,6 +184,7 @@ __PACKAGE__->meta->make_immutable;
 package Musical::SignalGroup;
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -160,6 +195,12 @@ use Musical qw($mo);
 
 __PACKAGE__->rdf_type($mo->SignalGroup);
 
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-signal-group',
+    );
+
 __PACKAGE__->meta->make_immutable;
 }
 
@@ -167,6 +208,7 @@ __PACKAGE__->meta->make_immutable;
 package Musical::Sound;
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -176,6 +218,12 @@ extends 'Musical::Expression';
 use Musical qw($mo);
 
 __PACKAGE__->rdf_type($mo->Sound);
+
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-sound',
+    );
 
 __PACKAGE__->meta->make_immutable;
 }

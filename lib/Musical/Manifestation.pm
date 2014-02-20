@@ -14,6 +14,7 @@
 package Musical::Manifestation;
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -26,6 +27,12 @@ use MusicCircle::MediaType;
 use Musical::Expression;
 
 __PACKAGE__->rdf_type($mo->MusicalManifestation);
+
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-musical-manifestation',
+    );
 
 has 'embodiment_of' => (
     traits       => ['Semantic'],

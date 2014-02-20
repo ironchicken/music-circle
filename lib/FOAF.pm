@@ -27,10 +27,17 @@ our $foaf = RDF::Trine::Namespace->new('http://xmlns.com/foaf/spec/#term_');
 package FOAF::Agent;
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 with qw(MooseX::Semantic::Role::WithRdfType);
 
 __PACKAGE__->rdf_type($foaf->Agent);
+
+class_has 'media_type' => (
+    is => 'ro',
+    isa => 'Str',
+    default => 'application/x-foaf-agent',
+    );
 
 __PACKAGE__->meta->make_immutable;
 }

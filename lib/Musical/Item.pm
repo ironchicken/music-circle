@@ -17,6 +17,7 @@ package Musical::Item;
 # with the Music Ontology class mo:MusicalItem.
 
 use Moose;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
 
 with qw(MooseX::Semantic::Role::PortableResource);
@@ -27,6 +28,12 @@ use FRBR;
 use Musical::Manifestation;
 
 __PACKAGE__->rdf_type($mo->MusicalItem);
+
+class_has 'media_type' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => 'application/x-mc-musical-item',
+    );
 
 has 'exemplar_of' => (
     traits       => ['Semantic'],

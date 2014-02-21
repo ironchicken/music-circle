@@ -11,19 +11,36 @@
 #
 # Copyright (C) 2013 Richard Lewis, Goldsmiths' College
 
-use KiokuDB;
 use MusicCircle::Config;
 
 package MusicCircle::Data;
 
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw(connect);
+our @EXPORT = qw(connect $dir);
 
-our $d;
+use KiokuDB;
+use KiokuDB::TypeMap;
+use KiokuDB::TypeMap::Entry::Callback;
+
+# FIXME Find a way to make this break in a sensible way when connect()
+# has not yet been called. Currently you just get "Can't call method
+# "store" on an undefined value".
+our $dir;
 
 sub connect {
-    $d = KiokuDB->connect($MusicCircle::Config::options->{DSN}, create => 1);
+    $dir = KiokuDB->connect(
+        $MusicCircle::Config::options->{DSN},
+        create  => 1,
+        typemap => KiokuDB::TypeMap->new(
+            entries => {
+                'RDF::Trine::Node::Resource' => KiokuDB::TypeMap::Entry::Callback->new(
+                    intrinsic => 1,
+                    collapse  => "uri_value",
+                    expand    => "new",
+                    ),
+            }),
+        );
 }
 
 1;

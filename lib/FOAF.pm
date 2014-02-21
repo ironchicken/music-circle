@@ -29,7 +29,11 @@ package FOAF::Agent;
 use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
-with qw(MooseX::Semantic::Role::WithRdfType);
+with qw(MooseX::Semantic::Role::PortableResource);
+
+use RDF::Trine::Namespace qw(rdf xsd);
+use MusicCircle qw($mc $auto_rdf_about);
+use UUID::Tiny qw(create_uuid_as_string);
 
 __PACKAGE__->rdf_type($foaf->Agent);
 
@@ -37,6 +41,22 @@ class_has 'media_type' => (
     is => 'ro',
     isa => 'Str',
     default => 'application/x-foaf-agent',
+    );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/agent',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
     );
 
 __PACKAGE__->meta->make_immutable;

@@ -23,7 +23,7 @@ sub main {
     MusicCircle::Data::connect();
 
     my $runner = Plack::Runner->new;
-    $runner->parse_options(@MusicCircle::Config::options->{server});
+    $runner->set_options(%{ $MusicCircle::Config::options->{server} });
     $runner->run($MusicCircle::API::mc);
 }
 

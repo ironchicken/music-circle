@@ -34,7 +34,6 @@ with qw(MooseX::Semantic::Role::PortableResource);
 use RDF::Trine::Namespace qw(rdf xsd);
 use SIOC;
 use MusicCircle qw($mc $auto_rdf_about);
-use UUID::Tiny qw(create_uuid_as_string);
 
 __PACKAGE__->rdf_type($foaf->Agent);
 

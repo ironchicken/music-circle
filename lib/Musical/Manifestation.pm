@@ -13,6 +13,9 @@
 
 package Musical::Manifestation;
 
+# This package defines the Musical::Manifestation class which
+# corresponds with the Music Ontology class mo:MusicalManifestation.
+
 use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;

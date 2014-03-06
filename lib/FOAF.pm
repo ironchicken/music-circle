@@ -32,6 +32,7 @@ use namespace::autoclean;
 with qw(MooseX::Semantic::Role::PortableResource);
 
 use RDF::Trine::Namespace qw(rdf xsd);
+use SIOC;
 use MusicCircle qw($mc $auto_rdf_about);
 use UUID::Tiny qw(create_uuid_as_string);
 
@@ -57,6 +58,21 @@ has 'id' => (
     isa          => 'Str',
     uri          => $mc->id,
     rdf_datatype => $xsd->string,
+    );
+
+has 'name' => (
+    traits => ['Semantic'],
+    is => 'rw',
+    isa => 'Str',
+    uri => $foaf->name,
+    rdf_datatype => $xsd->string,
+    );
+
+has 'account' => (
+    traits => ['Semantic'],
+    is => 'rw',
+    isa => 'SIOC::UserAccount',
+    uri => $foaf->account,
     );
 
 __PACKAGE__->meta->make_immutable;

@@ -81,6 +81,30 @@ has 'dimensions' => (
     isa          => 'ArrayRef[Musical::Dimension]',
     );
 
+sub render {
+
+}
+
+sub select_point {
+
+}
+
+sub select_region {
+
+}
+
+sub search {
+
+}
+
+sub browse {
+
+}
+
+sub sonify {
+
+}
+
 __PACKAGE__->meta->make_immutable;
 }
 

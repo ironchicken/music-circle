@@ -16,6 +16,26 @@ package Musical::DataSource;
 use Moose;
 use namespace::autoclean;
 
+sub capabilities {
+
+}
+
+sub content_types {
+
+}
+
+sub search {
+
+}
+
+sub retrieve {
+
+}
+
+sub cache {
+
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;

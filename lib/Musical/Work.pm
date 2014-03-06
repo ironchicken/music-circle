@@ -17,9 +17,12 @@ package Musical::Work;
 # the Music Ontology class mo:MusicalWork.
 
 use Moose;
+use MooseX::Storage;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
-with qw(MooseX::Semantic::Role::PortableResource);
+
+with 'MooseX::Semantic::Role::PortableResource',
+    Storage('format' => 'JSON');
 
 use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
@@ -101,6 +104,18 @@ has 'lyrics' => (
     isa          => 'Musical::Lyrics',
     uri          => $mo->lyrics,
     );
+
+has '+_user_agent' => (
+    traits => ['DoNotSerialize'],
+    );
+
+# has '+rdf_about' => (
+#     traits => ['DoNotSerialize'],
+#     );
+
+# has '+_is_auto_generated' => (
+#     traits => ['DoNotSerialize'],
+#     );
 
 __PACKAGE__->meta->make_immutable;
 

@@ -18,10 +18,11 @@ package FRBR;
 
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw($frbr);
+our @EXPORT = qw($frbr $dc);
 
 use RDF::Trine::Namespace ();
 our $frbr = RDF::Trine::Namespace->new('http://purl.org/vocab/frbr/core#');
+our $dc = RDF::Trine::Namespace->new('http://purl.org/dc/elements/1.1/');
 
 {
 package FRBR::ResponsibleEntity;

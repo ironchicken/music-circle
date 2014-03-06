@@ -24,8 +24,7 @@ with qw(MooseX::Semantic::Role::PortableResource);
 use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
 use MusicCircle qw($mc $auto_rdf_about);
-use FRBR qw($frbr);
-use UUID::Tiny qw(create_uuid_as_string);
+use FRBR qw($frbr $dc);
 
 __PACKAGE__->rdf_type($mo->MusicalWork);
 
@@ -48,6 +47,14 @@ has 'id' => (
     is           => 'ro',
     isa          => 'Str',
     uri          => $mc->id,
+    rdf_datatype => $xsd->string,
+    );
+
+has 'title' => (
+    traits       => ['Semantic'],
+    is           => 'rw',
+    isa          => 'Str',
+    uri          => $dc->title,
     rdf_datatype => $xsd->string,
     );
 

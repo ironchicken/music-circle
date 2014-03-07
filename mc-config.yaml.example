@@ -1,0 +1,15 @@
+DSN: bdb:dir=/home/mas01rl/code/mc-meta/test-db
+uri_domain: 'http://musiccircle.t-mus.org'
+memcached:
+  servers:
+    - localhost:11211
+    - /var/sock/memcached
+  debug: 0
+  compress_threshold: 10_000
+server:
+  host: localhost
+  port: 3030
+oauth_providers:
+  Twitter:
+    consumer_key: ''
+    consumer_secret: ''

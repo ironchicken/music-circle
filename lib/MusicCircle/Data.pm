@@ -19,28 +19,12 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT = qw(connect $dir);
 
-use KiokuDB;
-use KiokuDB::TypeMap;
-use KiokuDB::TypeMap::Entry::Callback;
+use RDF::Trine::Store;
 
-# FIXME Find a way to make this break in a sensible way when connect()
-# has not yet been called. Currently you just get "Can't call method
-# "store" on an undefined value".
-our $dir;
+our $store;
 
 sub connect {
-    $dir = KiokuDB->connect(
-        $MusicCircle::Config::options->{DSN},
-        create  => 1,
-        typemap => KiokuDB::TypeMap->new(
-            entries => {
-                'RDF::Trine::Node::Resource' => KiokuDB::TypeMap::Entry::Callback->new(
-                    intrinsic => 1,
-                    collapse  => "uri_value",
-                    expand    => "new",
-                    ),
-            }),
-        );
+    $store = RDF::Trine::Store->new($MusicCircle::Config::options->{rdf_store});
 }
 
 1;

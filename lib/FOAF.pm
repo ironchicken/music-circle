@@ -11,6 +11,8 @@
 #
 # Copyright (C) 2013 Richard Lewis, Goldsmiths' College
 
+use MusicCircle::Config;
+
 package FOAF;
 
 # This package provides some useful FOAF classes from
@@ -29,13 +31,14 @@ package FOAF::Agent;
 use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
-with qw(MooseX::Semantic::Role::PortableResource);
+with qw(MooseX::Semantic::Role::RdfImport MooseX::Semantic::Role::RdfExport MooseX::Semantic::Role::RdfBackend);
 
 use RDF::Trine::Namespace qw(rdf xsd);
 use SIOC;
 use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($foaf->Agent);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
 
 class_has 'media_type' => (
     is => 'ro',

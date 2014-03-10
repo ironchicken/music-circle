@@ -11,18 +11,18 @@
 #
 # Copyright (C) 2013 Richard Lewis, Goldsmiths' College
 
+use MusicCircle::Config;
+
 package Musical::Work;
 
 # This package defines the Musical::Work class which corresponds with
 # the Music Ontology class mo:MusicalWork.
 
 use Moose;
-use MooseX::Storage;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
 
-with 'MooseX::Semantic::Role::PortableResource',
-    Storage('format' => 'JSON');
+with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
 use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
@@ -30,6 +30,7 @@ use MusicCircle qw($mc $auto_rdf_about);
 use FRBR qw($frbr $dc);
 
 __PACKAGE__->rdf_type($mo->MusicalWork);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
 
 class_has 'media_type' => (
     is           => 'ro',
@@ -104,18 +105,6 @@ has 'lyrics' => (
     isa          => 'Musical::Lyrics',
     uri          => $mo->lyrics,
     );
-
-has '+_user_agent' => (
-    traits => ['DoNotSerialize'],
-    );
-
-# has '+rdf_about' => (
-#     traits => ['DoNotSerialize'],
-#     );
-
-# has '+_is_auto_generated' => (
-#     traits => ['DoNotSerialize'],
-#     );
 
 __PACKAGE__->meta->make_immutable;
 

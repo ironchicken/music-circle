@@ -1,4 +1,11 @@
-DSN: bdb:dir=/home/mas01rl/code/mc-meta/test-db
+rdf_store:
+  storetype: DBI
+  name: mc
+  dsn: DBI:Pg:dbname=mc
+  username: ''
+  password: ''
+object_store:
+  dsn: bdb:dir=/home/mas01rl/code/mc-meta/test-db
 uri_domain: 'http://musiccircle.t-mus.org'
 memcached:
   servers:

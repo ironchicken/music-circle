@@ -20,6 +20,7 @@ our @EXPORT = qw($mc);
 use MusicCircle::Data;
 
 use Plack::Builder;
+use Plack::Request;
 use Plack::Middleware::REST;
 use Plack::Middleware::Negotiate;
 use Plack::Middleware::Cached;
@@ -27,27 +28,31 @@ use Plack::Middleware::Options;
 use Plack::Middleware::REST::Util;
 use Plack::Middleware::OAuth;
 use Cache::Memcached::Fast;
-use JSON;
+use JSON::Syck;
 
 my $retrieve_json = sub {
     my ($env, $class) = (shift, shift);
     my %args = @_;
 
-    my $scope = $MusicCircle::Data::dir->new_scope;
+    # FIXME What do you think about this? It makes this sub
+    # class-agnostic. But maybe it's badly factored? Seems wrong to
+    # require a module every time a request is made.
+    (my $file = $class) =~ s|::|/|g;
+    require $file . '.pm';
+    $class->import();
 
-    my $id = request_id($env);
-    my $obj = $MusicCircle::Data::dir->lookup($id);
+    my $req = Plack::Request->new($env);
+    my $uri = $MusicCircle::Config::options->{uri_domain} . $req->request_uri;
+    my $count = $MusicCircle::Data::store->count_statements(RDF::Trine::Node::Resource->new($uri), undef, undef);
 
-    if ($obj && ($obj->blessed() eq $class)) {
-        $DB::single=1;
-        # This is not really recommended;
-        # $MusicCircle::Data::dir->linker->backend->get($id); is the other way of getting it
-        return [200, [], [JSON->new->allow_blessed->encode($MusicCircle::Data::dir->live_objects->ids_to_entries($id)->{data})]];
+    if ($count) {
+        my $obj = $class->new_from_store($uri);
+        return [200, [], [JSON::Syck::Dump($obj)]];
 
         # Ideally, we would use MooseX::Storage like this
         #return [200, [], [$obj->freeze()]];
     } else {
-        return [404, [], ["#$id was not found.\n"]];
+        return [404, [], [JSON::Syck::Dump("#$id was not found.\n")]];
     }
 };
 
@@ -55,12 +60,16 @@ my $retrieve_rdf = sub {
     my ($env, $class) = (shift, shift);
     my %args = @_;
 
-    my $scope = $MusicCircle::Data::dir->new_scope;
+    (my $file = $class) =~ s|::|/|g;
+    require $file . '.pm';
+    $class->import();
 
-    my $id = request_id($env);
-    my $obj = $MusicCircle::Data::dir->lookup($id);
+    my $req = Plack::Request->new($env);
+    my $uri = $MusicCircle::Config::options->{uri_domain} . $req->request_uri;
+    my $count = $MusicCircle::Data::store->count_statements(RDF::Trine::Node::Resource->new($uri), undef, undef);
 
-    if ($obj && ($obj->blessed() eq $class)) {
+    if ($count) {
+        my $obj = $class->new_from_store($MusicCircle::Config::options->{uri_domain} . $req->request_uri);
         return [200, [], [$obj->export_to_string(format => $args{format} || $DEFAULT_FORMAT)]];
     } else {
         return [404, [], ["#$id was not found.\n"]];

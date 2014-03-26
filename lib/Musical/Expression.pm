@@ -25,13 +25,32 @@ with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', '
 
 use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
+use MusicCircle qw($mc $auto_rdf_about);
 use FRBR;
 
 __PACKAGE__->rdf_type($mo->MusicalExpression);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
+
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
     default      => 'application/x-mc-musical-expression',
+    );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/musical-expression',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
     );
 
 has 'realization_of' => (
@@ -119,15 +138,35 @@ with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', '
 
 extends 'Musical::Expression';
 
+use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
+use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Libretto);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
 
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
     default      => 'application/x-mc-libretto',
     );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/libretto',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
+    );
+
 
 __PACKAGE__->meta->make_immutable;
 }
@@ -143,15 +182,35 @@ with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', '
 
 extends 'Musical::Expression';
 
+use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
+use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Lyrics);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
 
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
     default      => 'application/x-mc-lyrics',
     );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/lyrics',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
+    );
+
 
 __PACKAGE__->meta->make_immutable;
 }
@@ -167,7 +226,9 @@ with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', '
 
 extends 'Musical::Expression';
 
+use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
+use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Score);
 
@@ -175,6 +236,22 @@ class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
     default      => 'application/x-mc-score',
+    );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/score',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
     );
 
 __PACKAGE__->meta->make_immutable;
@@ -191,15 +268,35 @@ with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', '
 
 extends 'Musical::Expression';
 
+use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
+use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Signal);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
 
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
     default      => 'application/x-mc-signal',
     );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/signal',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
+    );
+
 
 __PACKAGE__->meta->make_immutable;
 }
@@ -215,15 +312,35 @@ with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', '
 
 extends 'Musical::Expression';
 
+use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
+use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->SignalGroup);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
 
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
     default      => 'application/x-mc-signal-group',
     );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/signal-group',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
+    );
+
 
 __PACKAGE__->meta->make_immutable;
 }
@@ -239,15 +356,35 @@ with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', '
 
 extends 'Musical::Expression';
 
+use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
+use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Sound);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
 
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
     default      => 'application/x-mc-sound',
     );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/sound',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
+    );
+
 
 __PACKAGE__->meta->make_immutable;
 }

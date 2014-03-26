@@ -24,14 +24,33 @@ with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', '
 
 use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
+use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Arrangement);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
 
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
     default      => 'application/x-mc-arrangement',
     );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/arrangement',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
+    );
+
 
 __PACKAGE__->meta->make_immutable;
 

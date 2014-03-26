@@ -13,10 +13,29 @@ use MusicCircle::Data;
 
 use FOAF;
 use Musical::Work;
+use Musical::Expression;
+use Musical::Manifestation;
+use Musical::Item;
 
-my @objects = ([Musical::Work->media_type, Musical::Work->new(title => 'Symphony No. 5')],
-               [FOAF::Agent->media_type, FOAF::Agent->new(name => 'Test Agent')],
-);
+# construct some objects
+
+my @objects = ();
+
+my $work = Musical::Work->new(title => 'Symphony No. 5');
+push @objects, [Musical::Work->media_type, $work];
+
+my $expr = Musical::Expression->new(realization_of => $work);
+push @objects, [Musical::Expression->media_type, $expr];
+
+my $manif = Musical::Manifestation->new(embodiment_of => $expr);
+push @objects, [Musical::Manifestation->media_type, $manif];
+
+my $item = Musical::Item->new(exemplar_of => $manif);
+push @objects, [Musical::Item->media_type, $item];
+
+push @objects, [FOAF::Agent->media_type, FOAF::Agent->new(name => 'Test Agent')];
+
+# store those objects
 
 foreach my $s (@objects) {
     my ($mtype, $obj) = @$s;

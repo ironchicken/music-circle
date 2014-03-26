@@ -24,17 +24,35 @@ with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', '
 
 use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
+use MusicCircle qw($mc $auto_rdf_about);
 use FRBR qw($frbr);
 use FOAF;
 use MusicCircle::MediaType;
 use Musical::Expression;
 
 __PACKAGE__->rdf_type($mo->MusicalManifestation);
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
 
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
     default      => 'application/x-mc-musical-manifestation',
+    );
+
+class_has 'uri_namespace' => (
+    is           => 'ro',
+    isa          => 'Str',
+    default      => '/musical-manifestation',
+    );
+
+around BUILDARGS => $auto_rdf_about;
+
+has 'id' => (
+    traits       => ['Semantic'],
+    is           => 'ro',
+    isa          => 'Str',
+    uri          => $mc->id,
+    rdf_datatype => $xsd->string,
     );
 
 has 'embodiment_of' => (
@@ -72,7 +90,7 @@ has 'compiler' => (
     uri          => $mo->compiler,
     );
 
-has 'media_type' => (
+has 'content_type' => (
     traits       => ['Semantic'],
     is           => 'rw',
     isa          => 'MusicCircle::MediaType',

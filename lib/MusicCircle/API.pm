@@ -148,6 +148,12 @@ our $mc = builder {
             #enable 'Cache', cache => $cache;
             enable 'Negotiate',
             formats => {
+                turtle => {
+                    type => 'application/x-mc-musical-expression+turtle',
+                    app => sub { $retrieve_rdf->(shift, 'Musical::Expression', format => 'turtle'); } },
+                rdfxml => {
+                    type => 'application/x-mc-musical-expression+rdfxml',
+                    app => sub { $retrieve_rdf->(shift, 'Musical::Expression', format => 'rdfxml'); } },
                 _ => {
                     app => sub { $retrieve_json->(shift, 'Musical::Expression'); } },
             },
@@ -195,7 +201,12 @@ our $mc = builder {
             #enable 'Cache', cache => $cache;
             enable 'Negotiate',
             formats => {
-
+                turtle => {
+                    type => 'application/x-mc-musical-manifestation+turtle',
+                    app => sub { $retrieve_rdf->(shift, 'Musical::Manifestation', format => 'turtle'); } },
+                rdfxml => {
+                    type => 'application/x-mc-musical-manifestation+rdfxml',
+                    app => sub { $retrieve_rdf->(shift, 'Musical::Manifestation', format => 'rdfxml'); } },
                 json => {
                     type => 'application/x-mc-musical-manifestation+json',
                     app => sub { $retrieve_json->(shift, 'Musical::Manifestation'); } },

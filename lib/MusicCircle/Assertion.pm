@@ -19,7 +19,7 @@ package MusicCircle::Assertion;
 use Moose;
 use namespace::autoclean;
 
-with qw(MooseX::Semantic::Role::PortableResource);
+with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
 use RDF::Trine::Namespace qw(rdf xsd);
 use MusicCircle qw($mc);

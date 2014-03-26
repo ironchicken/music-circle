@@ -21,7 +21,7 @@ use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
 
-with qw(MooseX::Semantic::Role::PortableResource);
+with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
 use RDF::Trine::Namespace qw(rdf xsd);
 use Musical qw($mo);
@@ -115,7 +115,7 @@ use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
 
-with qw(MooseX::Semantic::Role::PortableResource);
+with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
 extends 'Musical::Expression';
 
@@ -139,7 +139,7 @@ use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
 
-with qw(MooseX::Semantic::Role::PortableResource);
+with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
 extends 'Musical::Expression';
 
@@ -163,7 +163,7 @@ use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
 
-with qw(MooseX::Semantic::Role::PortableResource);
+with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
 extends 'Musical::Expression';
 
@@ -187,7 +187,7 @@ use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
 
-with qw(MooseX::Semantic::Role::PortableResource);
+with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
 extends 'Musical::Expression';
 
@@ -211,7 +211,7 @@ use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
 
-with qw(MooseX::Semantic::Role::PortableResource);
+with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
 extends 'Musical::Expression';
 
@@ -235,7 +235,7 @@ use Moose;
 use MooseX::ClassAttribute;
 use namespace::autoclean;
 
-with qw(MooseX::Semantic::Role::PortableResource);
+with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
 extends 'Musical::Expression';
 

@@ -30,16 +30,18 @@ use Plack::Middleware::OAuth;
 use Cache::Memcached::Fast;
 use JSON::Syck;
 
+# Ensure that all the classes that the API can serve up are loaded
+use Musical::Work;
+use Musical::Expression;
+use Musical::Manifestation;
+use Musical::Item;
+use MusicCircle::Contributor;
+use MusicCircle::Conversation;
+use MusicCircle::Assertion;
+
 my $retrieve_json = sub {
     my ($env, $class) = (shift, shift);
     my %args = @_;
-
-    # FIXME What do you think about this? It makes this sub
-    # class-agnostic. But maybe it's badly factored? Seems wrong to
-    # require a module every time a request is made.
-    (my $file = $class) =~ s|::|/|g;
-    require $file . '.pm';
-    $class->import();
 
     my $req = Plack::Request->new($env);
     my $uri = $MusicCircle::Config::options->{uri_domain} . $req->request_uri;
@@ -59,10 +61,6 @@ my $retrieve_json = sub {
 my $retrieve_rdf = sub {
     my ($env, $class) = (shift, shift);
     my %args = @_;
-
-    (my $file = $class) =~ s|::|/|g;
-    require $file . '.pm';
-    $class->import();
 
     my $req = Plack::Request->new($env);
     my $uri = $MusicCircle::Config::options->{uri_domain} . $req->request_uri;

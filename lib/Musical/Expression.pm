@@ -29,7 +29,8 @@ use MusicCircle qw($mc $auto_rdf_about);
 use FRBR;
 
 __PACKAGE__->rdf_type($mo->MusicalExpression);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+    if ($MusicCircle::Config::options->{store} eq 'rdf');
 
 class_has 'media_type' => (
     is           => 'ro',
@@ -143,7 +144,8 @@ use Musical qw($mo);
 use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Libretto);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+    if ($MusicCircle::Config::options->{store} eq 'rdf');
 
 class_has 'media_type' => (
     is           => 'ro',
@@ -187,7 +189,8 @@ use Musical qw($mo);
 use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Lyrics);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+    if ($MusicCircle::Config::options->{store} eq 'rdf');
 
 class_has 'media_type' => (
     is           => 'ro',
@@ -273,7 +276,8 @@ use Musical qw($mo);
 use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Signal);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+    if ($MusicCircle::Config::options->{store} eq 'rdf');
 
 class_has 'media_type' => (
     is           => 'ro',
@@ -317,7 +321,8 @@ use Musical qw($mo);
 use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->SignalGroup);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+    if ($MusicCircle::Config::options->{store} eq 'rdf');
 
 class_has 'media_type' => (
     is           => 'ro',
@@ -361,7 +366,8 @@ use Musical qw($mo);
 use MusicCircle qw($mc $auto_rdf_about);
 
 __PACKAGE__->rdf_type($mo->Sound);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+    if ($MusicCircle::Config::options->{store} eq 'rdf');
 
 class_has 'media_type' => (
     is           => 'ro',

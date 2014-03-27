@@ -1,3 +1,4 @@
+store: object
 rdf_store:
   storetype: DBI
   name: mc

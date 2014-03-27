@@ -39,16 +39,33 @@ use MusicCircle::Contributor;
 use MusicCircle::Conversation;
 use MusicCircle::Assertion;
 
+sub retrieve_object {
+    my ($env, $class) = (shift, shift);
+
+    if ($MusicCircle::Config::options->{store} eq 'rdf') {
+        my $req = Plack::Request->new($env);
+        my $uri = $MusicCircle::Config::options->{uri_domain} . $req->request_uri;
+        my $count = $MusicCircle::Data::store->count_statements(RDF::Trine::Node::Resource->new($uri), undef, undef);
+
+        return $class->new_from_store($uri) if $count;
+    }
+    elsif ($MusicCircle::Config::options->{store} eq 'object') {
+        my $scope = $MusicCircle::Data::store->new_scope;
+        my $id = request_id($env);
+        my $obj = $MusicCircle::Data::store->lookup($id);
+
+        return $obj if ($obj && ($obj->blessed() eq $class));
+    }
+}
+
 my $retrieve_json = sub {
     my ($env, $class) = (shift, shift);
     my %args = @_;
 
     my $req = Plack::Request->new($env);
-    my $uri = $MusicCircle::Config::options->{uri_domain} . $req->request_uri;
-    my $count = $MusicCircle::Data::store->count_statements(RDF::Trine::Node::Resource->new($uri), undef, undef);
+    my $obj = retrieve_object($env, $class);
 
-    if ($count) {
-        my $obj = $class->new_from_store($uri);
+    if ($obj) {
         return [200, [], [JSON::Syck::Dump($obj)]];
 
         # Ideally, we would use MooseX::Storage like this
@@ -63,11 +80,9 @@ my $retrieve_rdf = sub {
     my %args = @_;
 
     my $req = Plack::Request->new($env);
-    my $uri = $MusicCircle::Config::options->{uri_domain} . $req->request_uri;
-    my $count = $MusicCircle::Data::store->count_statements(RDF::Trine::Node::Resource->new($uri), undef, undef);
+    my $obj = retrieve_object($env, $class);
 
-    if ($count) {
-        my $obj = $class->new_from_store($MusicCircle::Config::options->{uri_domain} . $req->request_uri);
+    if ($obj) {
         return [200, [], [$obj->export_to_string(format => $args{format} || $DEFAULT_FORMAT)]];
     } else {
         return [404, [], ["#$id was not found.\n"]];

@@ -31,7 +31,8 @@ use MusicCircle::MediaType;
 use Musical::Expression;
 
 __PACKAGE__->rdf_type($mo->MusicalManifestation);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+    if ($MusicCircle::Config::options->{store} eq 'rdf');
 
 class_has 'media_type' => (
     is           => 'ro',

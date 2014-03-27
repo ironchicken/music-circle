@@ -17,14 +17,39 @@ package MusicCircle::Data;
 
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw(connect $dir);
-
-use RDF::Trine::Store;
+our @EXPORT = qw(connect $store);
 
 our $store;
 
 sub connect {
-    $store = RDF::Trine::Store->new($MusicCircle::Config::options->{rdf_store});
+    return if (defined $store);
+
+    # KiokuDB and RDF::Trine::Store are both available, the
+    # object_store configuration option determines which should be
+    # used
+    if ($MusicCircle::Config::options->{store} eq 'object') {
+        use KiokuDB;
+        use KiokuDB::TypeMap;
+        use KiokuDB::TypeMap::Entry::Callback;
+
+        $store = KiokuDB->connect(
+            $MusicCircle::Config::options->{object_store}->{dsn},
+            create  => 1,
+            typemap => KiokuDB::TypeMap->new(
+                entries => {
+                    'RDF::Trine::Node::Resource' => KiokuDB::TypeMap::Entry::Callback->new(
+                        intrinsic => 1,
+                        collapse  => "uri_value",
+                        expand    => "new",
+                        ),
+                }),
+            );
+    }
+    elsif ($MusicCircle::Config::options->{store} eq 'rdf') {
+        use RDF::Trine::Store;
+
+        $store = RDF::Trine::Store->new($MusicCircle::Config::options->{rdf_store});
+    }
 }
 
 1;

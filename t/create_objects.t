@@ -6,16 +6,22 @@ use warnings;
 use lib '../lib';
 
 use MusicCircle::Config 'test-config.yaml';
-use MusicCircle::Data;
+require MusicCircle::Data;
+
+my $scope;
+if ($MusicCircle::Config::options->{store} eq 'object') {
+    MusicCircle::Data::connect();
+    $scope = $MusicCircle::Data::store->new_scope;
+}
 
 # This test just tries creating and storing an object of each class in
 # MusicCircle.
 
-use FOAF;
-use Musical::Work;
-use Musical::Expression;
-use Musical::Manifestation;
-use Musical::Item;
+require FOAF;
+require Musical::Work;
+require Musical::Expression;
+require Musical::Manifestation;
+require Musical::Item;
 
 # construct some objects
 
@@ -41,10 +47,19 @@ foreach my $s (@objects) {
     my ($mtype, $obj) = @$s;
     print "$mtype ID: " . $obj->id . "\n";
     print "$mtype URI: " . $obj->rdf_about . "\n";
+    print $obj->export_to_string(format => 'turtle');
+    print "\n";
     eval {
-        print "Storing: . " . $obj->store() . "\n";
-        print "$mtype $obj stored as " . $obj->id . "\n";
+        if ($MusicCircle::Config::options->{store} eq 'rdf') {
+            print "Storing: . " . $obj->store() . "\n";
+            print "$mtype $obj stored as " . $obj->id . "\n";
+        }
+        elsif ($MusicCircle::Config::options->{store} eq 'object') {
+            my $obj_id = $MusicCircle::Data::store->store($obj->id => $obj);
+            print "$mtype $obj stored as $obj_id\n";
+        }
     };
     warn "$@\n" if ($@);
+    print "\n";
 }
 

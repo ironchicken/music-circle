@@ -27,7 +27,8 @@ use MusicCircle qw($mc $auto_rdf_about);
 use SIOC qw($sioc);
 
 __PACKAGE__->rdf_type($mc->Assertion);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store});
+__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+    if ($MusicCircle::Config::options->{store} eq 'rdf');
 
 class_has 'media_type' => (
     is           => 'ro',

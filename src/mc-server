@@ -9,19 +9,19 @@ use Getopt::Std;
 
 use lib '../lib';
 
-use MusicCircle::Config;
-use MusicCircle::API;
-use MusicCircle::Data;
-
 use Plack::Runner;
 
 sub main {
     my %opts;
     getopts('c:', \%opts);
 
-    MusicCircle::Config::load_config $opts{c};
+    require MusicCircle::Config;
+    MusicCircle::Config::load_config($opts{c});
+
+    require MusicCircle::Data;
     MusicCircle::Data::connect();
 
+    require MusicCircle::API;
     my $runner = Plack::Runner->new;
     $runner->set_options(%{ $MusicCircle::Config::options->{server} });
     $runner->run($MusicCircle::API::mc);

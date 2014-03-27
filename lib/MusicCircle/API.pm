@@ -169,6 +169,9 @@ our $mc = builder {
                 rdfxml => {
                     type => 'application/x-mc-musical-expression+rdfxml',
                     app => sub { $retrieve_rdf->(shift, 'Musical::Expression', format => 'rdfxml'); } },
+                json => {
+                    type => 'application/x-mc-musical-expression+json',
+                    app => sub { $retrieve_json->(shift, 'Musical::Expression'); } },
                 _ => {
                     app => sub { $retrieve_json->(shift, 'Musical::Expression'); } },
             },

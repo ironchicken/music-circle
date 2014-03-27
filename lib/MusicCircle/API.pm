@@ -71,7 +71,7 @@ my $retrieve_json = sub {
         # Ideally, we would use MooseX::Storage like this
         #return [200, [], [$obj->freeze()]];
     } else {
-        return [404, [], [JSON::Syck::Dump("#$id was not found.\n")]];
+        return [404, [], [JSON::Syck::Dump($req->request_uri . " was not found.\n")]];
     }
 };
 
@@ -85,7 +85,7 @@ my $retrieve_rdf = sub {
     if ($obj) {
         return [200, [], [$obj->export_to_string(format => $args{format} || $DEFAULT_FORMAT)]];
     } else {
-        return [404, [], ["#$id was not found.\n"]];
+        return [404, [], [$req->request_uri . " was not found.\n"]];
     }
 };
 

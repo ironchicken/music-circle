@@ -38,7 +38,7 @@ __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
-    default      => 'application/x-mc-musical-work',
+    default      => 'prs.t-mus.mc-musical-work',
     );
 
 class_has 'uri_namespace' => (

@@ -37,7 +37,7 @@ __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
-    default      => 'application/x-mc-musical-expression',
+    default      => 'prs.t-mus.mc-musical-expression',
     );
 
 class_has 'uri_namespace' => (
@@ -152,7 +152,7 @@ __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
-    default      => 'application/x-mc-libretto',
+    default      => 'prs.t-mus.mc-libretto',
     );
 
 class_has 'uri_namespace' => (
@@ -197,7 +197,7 @@ __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
-    default      => 'application/x-mc-lyrics',
+    default      => 'prs.t-mus.mc-lyrics',
     );
 
 class_has 'uri_namespace' => (
@@ -240,7 +240,7 @@ __PACKAGE__->rdf_type($mo->Score);
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
-    default      => 'application/x-mc-score',
+    default      => 'prs.t-mus.mc-score',
     );
 
 class_has 'uri_namespace' => (
@@ -284,7 +284,7 @@ __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
-    default      => 'application/x-mc-signal',
+    default      => 'prs.t-mus.mc-signal',
     );
 
 class_has 'uri_namespace' => (
@@ -329,7 +329,7 @@ __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
-    default      => 'application/x-mc-signal-group',
+    default      => 'prs.t-mus.mc-signal-group',
     );
 
 class_has 'uri_namespace' => (
@@ -374,7 +374,7 @@ __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
-    default      => 'application/x-mc-sound',
+    default      => 'prs.t-mus.mc-sound',
     );
 
 class_has 'uri_namespace' => (

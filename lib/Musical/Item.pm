@@ -35,7 +35,7 @@ __PACKAGE__->rdf_type($mo->MusicalItem);
 class_has 'media_type' => (
     is           => 'ro',
     isa          => 'Str',
-    default      => 'application/x-mc-musical-item',
+    default      => 'prs.t-mus.mc-musical-item',
     );
 
 class_has 'uri_namespace' => (

@@ -104,19 +104,19 @@ our $mc = builder {
             enable 'Negotiate',
             formats => {
                 xml => {
-                    type => 'application/x-mc-musical-work+xml',
+                    type => 'text/prs.t-mus.mc-musical-work+xml',
                     app => sub { $retrieve_xml->(shift, 'Musical::Work'); } },
                 turtle => {
-                    type => 'application/x-mc-musical-work+turtle',
+                    type => 'text/prs.t-mus.mc-musical-work+turtle',
                     app => sub { $retrieve_rdf->(shift, 'Musical::Work', format => 'turtle'); } },
                 rdfxml => {
-                    type => 'application/x-mc-musical-work+rdfxml',
+                    type => 'text/prs.t-mus.mc-musical-work+rdfxml',
                     app => sub { $retrieve_rdf->(shift, 'Musical::Work', format => 'rdfxml'); } },
                 json => {
-                    type => 'application/x-mc-musical-work+json',
+                    type => 'text/prs.t-mus.mc-musical-work+json',
                     app => sub { $retrieve_json->(shift, 'Musical::Work'); } },
                 html => {
-                    type => 'application/x-mc-musical-work+html',
+                    type => 'text/prs.t-mus.mc-musical-work+html',
                     app => sub { $retrieve_html->(shift, 'Musical::Work'); } },
                 _ => {
                     app => $retrieve_musical_work_json },
@@ -131,19 +131,19 @@ our $mc = builder {
                 enable 'Negotiate',
                 formats => {
                     xml => {
-                        type => 'application/x-mc-musical-work+xml',
+                        type => 'text/prs.t-mus.mc-musical-work+xml',
                         app => $create_musical_work_from_xml },
                     turtle => {
-                        type => 'application/x-mc-musical-work+turtle',
+                        type => 'text/prs.t-mus.mc-musical-work+turtle',
                         app => $create_musical_work_from_rdf },
                     json => {
-                        type => 'application/x-mc-musical-work+json',
+                        type => 'text/prs.t-mus.mc-musical-work+json',
                         app => $create_musical_work_from_json },
                     musicxml => {
-                        type => 'application/x-mc-musical-work+musicxml',
+                        type => 'text/prs.t-mus.mc-musical-work+musicxml',
                         app => $create_musical_work_from_musicxml },
                     kern => {
-                        type => 'application/x-mc-musical-work+kern',
+                        type => 'text/prs.t-mus.mc-musical-work+kern',
                         app => $create_musical_work_from_kern },
                     _ => { size => 0 }
                 },
@@ -166,13 +166,13 @@ our $mc = builder {
             enable 'Negotiate',
             formats => {
                 turtle => {
-                    type => 'application/x-mc-musical-expression+turtle',
+                    type => 'text/prs.t-mus.mc-musical-expression+turtle',
                     app => sub { $retrieve_rdf->(shift, 'Musical::Expression', format => 'turtle'); } },
                 rdfxml => {
-                    type => 'application/x-mc-musical-expression+rdfxml',
+                    type => 'text/prs.t-mus.mc-musical-expression+rdfxml',
                     app => sub { $retrieve_rdf->(shift, 'Musical::Expression', format => 'rdfxml'); } },
                 json => {
-                    type => 'application/x-mc-musical-expression+json',
+                    type => 'text/prs.t-mus.mc-musical-expression+json',
                     app => sub { $retrieve_json->(shift, 'Musical::Expression'); } },
                 _ => {
                     app => sub { $retrieve_json->(shift, 'Musical::Expression'); } },
@@ -187,19 +187,19 @@ our $mc = builder {
                 enable 'Negotiate',
                 formats => {
                     xml => {
-                        type => 'application/x-mc-musical-expression+xml',
+                        type => 'text/prs.t-mus.mc-musical-expression+xml',
                         app => $create_musical_expression_from_xml },
                     turtle => {
-                        type => 'application/x-mc-musical-expression+turtle',
+                        type => 'text/prs.t-mus.mc-musical-expression+turtle',
                         app => $create_musical_expression_from_rdf },
                     json => {
-                        type => 'application/x-mc-musical-expression+json',
+                        type => 'text/prs.t-mus.mc-musical-expression+json',
                         app => $create_musical_expression_from_json },
                     musicxml => {
-                        type => 'application/x-mc-musical-expression+musicxml',
+                        type => 'text/prs.t-mus.mc-musical-expression+musicxml',
                         app => $create_musical_expression_from_musicxml },
                     kern => {
-                        type => 'application/x-mc-musical-expression+kern',
+                        type => 'text/prs.t-mus.mc-musical-expression+kern',
                         app => $create_musical_expression_from_kern },
                     _ => { size => 0 }
                 },
@@ -222,22 +222,22 @@ our $mc = builder {
             enable 'Negotiate',
             formats => {
                 turtle => {
-                    type => 'application/x-mc-musical-manifestation+turtle',
+                    type => 'text/prs.t-mus.mc-musical-manifestation+turtle',
                     app => sub { $retrieve_rdf->(shift, 'Musical::Manifestation', format => 'turtle'); } },
                 rdfxml => {
-                    type => 'application/x-mc-musical-manifestation+rdfxml',
+                    type => 'text/prs.t-mus.mc-musical-manifestation+rdfxml',
                     app => sub { $retrieve_rdf->(shift, 'Musical::Manifestation', format => 'rdfxml'); } },
                 json => {
-                    type => 'application/x-mc-musical-manifestation+json',
+                    type => 'text/prs.t-mus.mc-musical-manifestation+json',
                     app => sub { $retrieve_json->(shift, 'Musical::Manifestation'); } },
                 musicxml => {
-                    type => 'application/x-mc-musical-manifestation+musicxml',
+                    type => 'text/prs.t-mus.mc-musical-manifestation+musicxml',
                     app => sub { $retrieve_musicxml->(shift, 'Musical::Manifestation'); } },
                 kern => {
-                    type => 'application/x-mc-musical-manifestation+kern',
+                    type => 'text/prs.t-mus.mc-musical-manifestation+kern',
                     app => sub { $retrieve_kern->(shift, 'Musical::Manifestation'); } },
                 mp3 => {
-                    type => 'application/x-mc-musical-manifestation+mp3',
+                    type => 'audio/prs.t-mus.mc-musical-manifestation+mp3',
                     app => sub { $retrieve_mp3->(shift, 'Musical::Manifestation'); } },
                 _ => {
                     app => sub { $retrieve_json->(shift, 'Musical::Manifestation'); } },
@@ -252,19 +252,19 @@ our $mc = builder {
                 enable 'Negotiate',
                 formats => {
                     xml => {
-                        type => 'application/x-mc-musical-manifestation+xml',
+                        type => 'text/prs.t-mus.mc-musical-manifestation+xml',
                         app => $create_musical_manifestation_from_xml },
                     turtle => {
-                        type => 'application/x-mc-musical-manifestation+turtle',
+                        type => 'text/prs.t-mus.mc-musical-manifestation+turtle',
                         app => $create_musical_manifestation_from_rdf },
                     json => {
-                        type => 'application/x-mc-musical-manifestation+json',
+                        type => 'text/prs.t-mus.mc-musical-manifestation+json',
                         app => $create_musical_manifestation_from_json },
                     musicxml => {
-                        type => 'application/x-mc-musical-manifestation+musicxml',
+                        type => 'text/prs.t-mus.mc-musical-manifestation+musicxml',
                         app => $create_musical_manifestation_from_musicxml },
                     kern => {
-                        type => 'application/x-mc-musical-manifestation+kern',
+                        type => 'text/prs.t-mus.mc-musical-manifestation+kern',
                         app => $create_musical_manifestation_from_kern },
                     _ => { size => 0 }
                 },

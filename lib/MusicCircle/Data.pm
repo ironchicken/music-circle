@@ -19,7 +19,7 @@ package MusicCircle::Data;
 
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw(connect $store);
+our @EXPORT = qw(connect find_works $store);
 
 our $store;
 
@@ -52,6 +52,10 @@ sub connect {
 
         $store = RDF::Trine::Store->new($MusicCircle::Config::options->{rdf_store});
     }
+}
+
+sub find_works {
+    return [];
 }
 
 1;

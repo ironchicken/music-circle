@@ -13,48 +13,49 @@
 #
 # Copyright (C) 2013, 2014 Richard Lewis, Goldsmiths' College
 
-package MusicCircle::Conversation;
+package MusicCircle::Conversation {
 
-# This package defines the MusicCircle::Conversation class which
-# represents a musical discourse.
+    # This package defines the MusicCircle::Conversation class which
+    # represents a musical discourse.
 
-use Moose;
-use MooseX::ClassAttribute;
-use namespace::autoclean;
+    use Moose;
+    use MooseX::ClassAttribute;
+    use namespace::autoclean;
 
-with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
+    with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
-use RDF::Trine::Namespace qw(rdf xsd);
-use MusicCircle qw($mc $auto_rdf_about);
-use SIOC qw($sioc);
+    use RDF::Trine::Namespace qw(rdf xsd);
+    use MusicCircle qw($mc $auto_rdf_about);
+    use SIOC qw($sioc);
 
-__PACKAGE__->rdf_type($mc->Conversation);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
-    if ($MusicCircle::Config::options->{store} eq 'rdf');
+    __PACKAGE__->rdf_type($mc->Conversation);
+    __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+        if ($MusicCircle::Config::options->{store} eq 'rdf');
 
-class_has 'media_type' => (
-    is           => 'ro',
-    isa          => 'Str',
-    default      => 'prs.t-mus.mc-conversation',
-    );
+    class_has 'media_type' => (
+        is           => 'ro',
+        isa          => 'Str',
+        default      => 'prs.t-mus.mc-conversation',
+        );
 
-class_has 'uri_namespace' => (
-    is           => 'ro',
-    isa          => 'Str',
-    default      => '/conversation',
-    );
+    class_has 'uri_namespace' => (
+        is           => 'ro',
+        isa          => 'Str',
+        default      => '/conversation',
+        );
 
-around BUILDARGS => $auto_rdf_about;
+    around BUILDARGS => $auto_rdf_about;
 
-has 'id' => (
-    traits       => ['Semantic'],
-    is           => 'ro',
-    isa          => 'Str',
-    uri          => $mc->id,
-    rdf_datatype => $xsd->string,
-    );
+    has 'id' => (
+        traits       => ['Semantic'],
+        is           => 'ro',
+        isa          => 'Str',
+        uri          => $mc->id,
+        rdf_datatype => $xsd->string,
+        );
 
 
-__PACKAGE__->meta->make_immutable;
+    __PACKAGE__->meta->make_immutable;
+}
 
 1;

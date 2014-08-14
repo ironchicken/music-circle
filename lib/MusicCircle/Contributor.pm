@@ -15,51 +15,52 @@
 
 use FRBR qw($frbr);
 
-package MusicCircle::Contributor;
+package MusicCircle::Contributor {
 
-# This package defines the MusicCircle::Contributor class which
-# represents an agent who participates in a musical discourse.
+    # This package defines the MusicCircle::Contributor class which
+    # represents an agent who participates in a musical discourse.
 
-use Moose;
-use MooseX::ClassAttribute;
+    use Moose;
+    use MooseX::ClassAttribute;
 
-extends 'FOAF::Agent';
+    extends 'FOAF::Agent';
 
-use namespace::autoclean;
+    use namespace::autoclean;
 
-with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
+    with 'MooseX::Semantic::Role::RdfImport', 'MooseX::Semantic::Role::RdfExport', 'MooseX::Semantic::Role::RdfBackend';
 
-use RDF::Trine::Namespace qw(rdf xsd);
-use MusicCircle qw($mc $auto_rdf_about);
-use SIOC qw($sioc);
+    use RDF::Trine::Namespace qw(rdf xsd);
+    use MusicCircle qw($mc $auto_rdf_about);
+    use SIOC qw($sioc);
 
-__PACKAGE__->rdf_type($mc->Contributor);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
-    if ($MusicCircle::Config::options->{store} eq 'rdf');
+    __PACKAGE__->rdf_type($mc->Contributor);
+    __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+        if ($MusicCircle::Config::options->{store} eq 'rdf');
 
-class_has 'media_type' => (
-    is           => 'ro',
-    isa          => 'Str',
-    default      => 'prs.t-mus.mc-contributor',
-    );
+    class_has 'media_type' => (
+        is           => 'ro',
+        isa          => 'Str',
+        default      => 'prs.t-mus.mc-contributor',
+        );
 
-class_has 'uri_namespace' => (
-    is           => 'ro',
-    isa          => 'Str',
-    default      => '/contributor',
-    );
+    class_has 'uri_namespace' => (
+        is           => 'ro',
+        isa          => 'Str',
+        default      => '/contributor',
+        );
 
-around BUILDARGS => $auto_rdf_about;
+    around BUILDARGS => $auto_rdf_about;
 
-has 'id' => (
-    traits       => ['Semantic'],
-    is           => 'ro',
-    isa          => 'Str',
-    uri          => $mc->id,
-    rdf_datatype => $xsd->string,
-    );
+    has 'id' => (
+        traits       => ['Semantic'],
+        is           => 'ro',
+        isa          => 'Str',
+        uri          => $mc->id,
+        rdf_datatype => $xsd->string,
+        );
 
 
-__PACKAGE__->meta->make_immutable;
+    __PACKAGE__->meta->make_immutable;
+}
 
 1;

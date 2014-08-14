@@ -13,11 +13,12 @@
 #
 # Copyright (C) 2013, 2014 Richard Lewis, Goldsmiths' College
 
-package MusicCircle::MediaType;
+package MusicCircle::MediaType {
 
-use Moose;
-use namespace::autoclean;
+    use Moose;
+    use namespace::autoclean;
 
-__PACKAGE__->meta->make_immutable;
+    __PACKAGE__->meta->make_immutable;
+}
 
 1;

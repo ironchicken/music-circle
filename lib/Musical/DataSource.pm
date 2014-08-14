@@ -13,31 +13,35 @@
 #
 # Copyright (C) 2013, 2014 Richard Lewis, Goldsmiths' College
 
-package Musical::DataSource;
+package Musical::DataSource {
 
-use Moose;
-use namespace::autoclean;
+    # FIX Could we read datasources from the YAML config file? Or
+    # should we implement them as subclasses stored in sub-modules.
 
-sub capabilities {
+    use Moose;
+    use namespace::autoclean;
 
+    sub capabilities {
+
+    }
+
+    sub content_types {
+
+    }
+
+    sub search {
+
+    }
+
+    sub retrieve {
+
+    }
+
+    sub cache {
+
+    }
+
+    __PACKAGE__->meta->make_immutable;
 }
-
-sub content_types {
-
-}
-
-sub search {
-
-}
-
-sub retrieve {
-
-}
-
-sub cache {
-
-}
-
-__PACKAGE__->meta->make_immutable;
 
 1;

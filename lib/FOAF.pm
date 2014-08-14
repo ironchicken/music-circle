@@ -27,60 +27,62 @@ our @EXPORT = qw($foaf);
 use RDF::Trine::Namespace ();
 our $foaf = RDF::Trine::Namespace->new('http://xmlns.com/foaf/spec/#term_');
 
-{
-package FOAF::Agent;
+package FOAF::Agent {
 
-use Moose;
-use MooseX::ClassAttribute;
-use namespace::autoclean;
-with qw(MooseX::Semantic::Role::RdfImport MooseX::Semantic::Role::RdfExport MooseX::Semantic::Role::RdfBackend);
+    use Moose;
+    use MooseX::ClassAttribute;
+    use namespace::autoclean;
 
-use RDF::Trine::Namespace qw(rdf xsd);
-use SIOC;
-use MusicCircle qw($mc $auto_rdf_about);
+    with ('MooseX::Semantic::Role::RdfImport',
+          'MooseX::Semantic::Role::RdfExport',
+          'MooseX::Semantic::Role::RdfBackend');
 
-__PACKAGE__->rdf_type($foaf->Agent);
-__PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
-    if ($MusicCircle::Config::options->{store} eq 'rdf');
+    use RDF::Trine::Namespace qw(rdf xsd);
+    use SIOC;
+    use MusicCircle qw($mc $auto_rdf_about);
 
-class_has 'media_type' => (
-    is => 'ro',
-    isa => 'Str',
-    default => 'prs.t-mus.foaf-agent',
-    );
+    __PACKAGE__->rdf_type($foaf->Agent);
+    __PACKAGE__->rdf_store($MusicCircle::Config::options->{rdf_store})
+        if ($MusicCircle::Config::options->{store} eq 'rdf');
 
-class_has 'uri_namespace' => (
-    is           => 'ro',
-    isa          => 'Str',
-    default      => '/agent',
-    );
+    class_has 'media_type' => (
+        is => 'ro',
+        isa => 'Str',
+        default => 'prs.t-mus.foaf-agent',
+        );
 
-around BUILDARGS => $auto_rdf_about;
+    class_has 'uri_namespace' => (
+        is           => 'ro',
+        isa          => 'Str',
+        default      => '/agent',
+        );
 
-has 'id' => (
-    traits       => ['Semantic'],
-    is           => 'ro',
-    isa          => 'Str',
-    uri          => $mc->id,
-    rdf_datatype => $xsd->string,
-    );
+    around BUILDARGS => $auto_rdf_about;
 
-has 'name' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'Str',
-    uri => $foaf->name,
-    rdf_datatype => $xsd->string,
-    );
+    has 'id' => (
+        traits       => ['Semantic'],
+        is           => 'ro',
+        isa          => 'Str',
+        uri          => $mc->id,
+        rdf_datatype => $xsd->string,
+        );
 
-has 'account' => (
-    traits => ['Semantic'],
-    is => 'rw',
-    isa => 'SIOC::UserAccount',
-    uri => $foaf->account,
-    );
+    has 'name' => (
+        traits => ['Semantic'],
+        is => 'rw',
+        isa => 'Str',
+        uri => $foaf->name,
+        rdf_datatype => $xsd->string,
+        );
 
-__PACKAGE__->meta->make_immutable;
+    has 'account' => (
+        traits => ['Semantic'],
+        is => 'rw',
+        isa => 'SIOC::UserAccount',
+        uri => $foaf->account,
+        );
+
+    __PACKAGE__->meta->make_immutable;
 }
 
 1;

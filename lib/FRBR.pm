@@ -26,28 +26,28 @@ use RDF::Trine::Namespace ();
 our $frbr = RDF::Trine::Namespace->new('http://purl.org/vocab/frbr/core#');
 our $dc = RDF::Trine::Namespace->new('http://purl.org/dc/elements/1.1/');
 
-{
-package FRBR::ResponsibleEntity;
+package FRBR::ResponsibleEntity {
 
-use Moose;
-use namespace::autoclean;
-with qw(MooseX::Semantic::Role::WithRdfType);
+    use Moose;
+    use namespace::autoclean;
 
-__PACKAGE__->rdf_type($frbr->ResponsibleEntity);
+    with ('MooseX::Semantic::Role::WithRdfType');
 
-__PACKAGE__->meta->make_immutable;
+    __PACKAGE__->rdf_type($frbr->ResponsibleEntity);
+
+    __PACKAGE__->meta->make_immutable;
 }
 
-{
-package FRBR::Person;
+package FRBR::Person {
 
-use Moose;
-use namespace::autoclean;
-with qw(MooseX::Semantic::Role::WithRdfType);
+    use Moose;
+    use namespace::autoclean;
 
-__PACKAGE__->rdf_type($frbr->Person);
+    with ('MooseX::Semantic::Role::WithRdfType');
 
-__PACKAGE__->meta->make_immutable;
+    __PACKAGE__->rdf_type($frbr->Person);
+
+    __PACKAGE__->meta->make_immutable;
 }
 
 1;
